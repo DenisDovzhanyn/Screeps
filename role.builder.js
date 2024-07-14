@@ -1,6 +1,7 @@
 var roleBuilder = {
     
     run: function(creep) {
+        var constructionSit = creep.room.find(FIND_CONSTRUCTION_SITES)
         
         if(creep.memory.building && creep.store[RESOURCE_ENERGY] == 0){
             creep.memory.building = false
@@ -10,12 +11,14 @@ var roleBuilder = {
             creep.say('YAYAYA BUILDING YAYA')
         }
         
-        if(creep.memory.building) { 
-            var constructionSit = creep.room.find(FIND_CONSTRUCTION_SITES)
+        if(creep.memory.building && constructionSit.length == 0){
+            creep.moveTo(Game.flags.AFK, {visualizePathStyle: {stroke: '#0000ff'}})
+        }
+        else if(creep.memory.building) { 
             if(constructionSit.length){
                 if(creep.build(constructionSit[0]) == ERR_NOT_IN_RANGE) creep.moveTo(constructionSit[0], {visualizePathStyle: {stroke: '#0000ff'}})
             }
-        } else {
+        } else if(!creep.memory.building){
             var resourc = creep.room.find(FIND_SOURCES)
             if(creep.harvest(resourc[0]) == ERR_NOT_IN_RANGE) creep.moveTo(resourc[0], {visualizePathStyle: {stroke: '#0000ff'}})
             
