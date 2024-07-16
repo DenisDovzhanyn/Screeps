@@ -15,6 +15,7 @@ var roleUpgrader = {
                 creep.moveTo(sources[0], {visualizePathStyle: {stroke: '#00ff00'}})
             }
         } else {
+            
             if(creep.upgradeController(creep.room.controller) == ERR_NOT_IN_RANGE){
                 creep.moveTo(creep.room.controller, {visualizePathStyle: {stroke: '#00ff00'}})
             }

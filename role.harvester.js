@@ -3,9 +3,15 @@ var roleHarvester = {
          
          var structs = creep.room.find(FIND_STRUCTURES, {
              filter: (structure) => {
-                 return (structure.structureType == STRUCTURE_EXTENSION || structure.structureType == STRUCTURE_SPAWN 
-                 || structure.structureType == STRUCTURE_CONTAINER) 
+                 return (structure.structureType == STRUCTURE_SPAWN || structure.structureType == STRUCTURE_EXTENSION
+                 || structure.structureType == STRUCTURE_TOWER /*|| structure.structureType == STRUCTURE_CONTAINER */ ) 
                  && structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0
+             }
+         })
+         
+         var containr = creep.room.find(FIND_STRUCTURES, {
+             filter: (structure) => {
+                 return (structure.structureType == STRUCTURE_CONTAINER) && structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0
              }
          })
          
@@ -19,7 +25,11 @@ var roleHarvester = {
              if(creep.transfer(structs[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE){
                  creep.moveTo(structs[0], {visualizePathStyle: {stroke: '#ff0000'}})
              }
-         } else{
+         } else if(containr.length > 0){
+             if (creep.transfer(containr[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE){
+                 creep.moveTo(containr[0], {visualizePathStyle: {stroke: '#ff0000'}})
+             }
+         }else{
              creep.moveTo(Game.flags.AFK, {visualizePathStyle: {stroke: '#ff0000'}})
          }
      }
