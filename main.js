@@ -10,7 +10,7 @@ module.exports.loop = function () {
     
     if(tower){
         var closeHostile = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS)
-        if(closeHostile) tower.attack(closeHostile)
+        if(closeHostile && !closeHostile.owner('runtime_error')) tower.attack(closeHostile)
     }
     
     
