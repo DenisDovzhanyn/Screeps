@@ -6,6 +6,13 @@ module.exports.loop = function () {
     var harvesters = _.filter(Game.creeps, (creep) => creep.memory.role == 'harvester');
     var upgraders = _.filter(Game.creeps, (creep) => creep.memory.role == 'upgrader');
     var builders = _.filter(Game.creeps, (creep) => creep.memory.role == 'builder');
+    var tower = Game.getObjectById('6695b7be8a79c9977b6769f9')
+    
+    if(tower){
+        var closeHostile = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS)
+        if(closeHostile) tower.attack(closeHostile)
+    }
+    
     
     if(harvesters.length < 4){
         var newName = 'harvester' + Game.time
