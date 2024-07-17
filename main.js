@@ -12,12 +12,10 @@ module.exports.loop = function () {
         var closeHostile = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS)
         if(closeHostile && !closeHostile.owner('runtime_error')) tower.attack(closeHostile)
     }
-    
-    
     if(harvesters.length < 4){
         var newName = 'harvester' + Game.time
         console.log('new harv incoming: ' + newName)
-        Game.spawns['Spawn1'].spawnCreep([WORK, CARRY, CARRY, MOVE, MOVE], newName, {memory: {role: 'harvester'}})
+        Game.spawns['Spawn1'].spawnCreep([WORK, WORK, CARRY, CARRY, MOVE, MOVE, MOVE], newName, {memory: {role: 'harvester'}})
     } else if(upgraders.length < 5){
         var newName = 'upgrader' + Game.time
         console.log('new upgrader incoming: ' + newName)
