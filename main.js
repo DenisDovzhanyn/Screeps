@@ -23,7 +23,7 @@ module.exports.loop = function () {
     } else if(builders.length < 5){
         var newName = 'builder' + Game.time
         console.log('new builder incoming: ' + newName)
-        Game.spawns['Spawn1'].spawnCreep([WORK, CARRY, MOVE], newName, {memory: {role: 'builder'}})
+        Game.spawns['Spawn1'].spawnCreep([WORK, WORK, CARRY, MOVE], newName, {memory: {role: 'builder'}})
     }
     
     
